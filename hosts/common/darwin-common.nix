@@ -159,7 +159,7 @@ in
       #"wireshark"
     ];
     masApps = {
-      "WhatsApp" = 310633997;
+      #"WhatsApp" = 310633997;
       "Telegram" = 747648890;
 
       ## Comentados - descomentar para instalar
@@ -261,5 +261,4 @@ in
         PMPrintingExpandedStateForPrint2 = true;
       };
   };
-
 }
