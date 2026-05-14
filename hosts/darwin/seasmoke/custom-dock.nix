@@ -2,15 +2,17 @@
 {
   system.defaults.dock = {
     persistent-apps = [
-      "/Applications/Launchpad.app"
-      "/Applications/Calendar.app"
+      "/System/Library/CoreServices/Finder.app"
+      "/System/Applications/Calendar.app"
       "/Applications/WhatsApp.app"
       "/Applications/Telegram.app"
       "/Applications/Safari.app"
-      "/Applications/Visual Studio Code.app"
       "/Applications/Ghostty.app"
       "/Applications/Warp.app"
-      "/Applications/System Settings.app.app"
+      "/System/Applications/System Settings.app"
+      "/Applications/Evernote.app"
+      "/Applications/Notion.app"
+      "/Applications/Claude.app"
     ];
   };
 }
