@@ -33,11 +33,11 @@
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.alex = { imports = [ ./../../../home/alex.nix ]; };
+  home-manager.users.hefes = { imports = [ ./../../../home/hefes.nix ]; };
 
-  users.users.alex = {
+  users.users.hefes = {
     isNormalUser = true;
-    description = "alex";
+    description = "hefes";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       home-manager

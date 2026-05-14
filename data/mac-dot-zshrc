@@ -18,10 +18,10 @@ export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 
 # path fix for homebrew
 export PATH=$PATH:/opt/homebrew/bin/
-export PATH=$PATH:/Users/alex/go/bin
-#export EDITOR=vi
-export VISUAL=/etc/profiles/per-user/alex/bin/nvim
-export EDITOR=/etc/profiles/per-user/alex/bin/nvim
+export PATH=$PATH:/Users/hefes/go/bin
+#export EDITOR=nano
+export VISUAL=/etc/profiles/per-user/hefes/bin/nano
+export EDITOR=/etc/profiles/per-user/hefes/bin/nano
 export TERM=xterm
 
 # Nix
@@ -54,5 +54,6 @@ alias kcgpo='kubectl get pod'
 eval "$(starship init zsh)"
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 alias ghostty="/Applications/Ghostty.app/Contents/MacOS/ghostty"
+alias iranas='ssh nas'
 
-#/Users/alex/go/bin/figurine -f "Doom.flf" magrathea
+#/Users/hefes/go/bin/figurine -f "Doom.flf" magrathea

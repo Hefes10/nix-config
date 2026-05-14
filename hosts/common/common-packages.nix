@@ -20,7 +20,7 @@ in
     dua # Modern Unix `du`
     duf # Modern Unix `df`
     entr # Modern Unix `watch`
-    esptool
+    #esptool #programar, borrar, y leer la memoria flash de dispositivos ESP
     fastfetch
     fd
     ffmpeg
@@ -43,8 +43,8 @@ in
     ripgrep
     skopeo
     smartmontools
-    television
-    terraform
+    #television
+    #terraform
     tree
     unzip
     watch
