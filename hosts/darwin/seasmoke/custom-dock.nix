@@ -2,7 +2,6 @@
 {
   system.defaults.dock = {
     persistent-apps = [
-      "/System/Library/CoreServices/Finder.app"
       "/System/Applications/Calendar.app"
       "/Applications/WhatsApp.app"
       "/Applications/Telegram.app"

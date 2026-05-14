@@ -67,7 +67,7 @@ in
     global.autoUpdate = true;
 
     brews = [
-      # vacío - todo movido a casks o nix
+      "bitwarden-cli"
     ];
     taps = [
     ];
@@ -106,7 +106,6 @@ in
       #"screenflow"
 
       ## Sistema / utilidades
-      "bitwarden-cli"      # password manager CLI
       "istat-menus"
       "omnidisksweeper"
       #"alcove"

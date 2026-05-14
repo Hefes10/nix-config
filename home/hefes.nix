@@ -82,6 +82,12 @@
     enableCompletion = true;
     autosuggestion.enable = true;
     #initExtra = (builtins.readFile ../mac-dot-zshrc);
+
+    # Aseguramos que los binarios de nix-darwin estén siempre en PATH
+    # (en macOS reciente /run/current-system a veces no se crea)
+    profileExtra = ''
+      export PATH="/nix/var/nix/profiles/system/sw/bin:/nix/var/nix/profiles/default/bin:$PATH"
+    '';
   };
 
   programs.tmux = {
