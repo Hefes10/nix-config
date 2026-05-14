@@ -1,58 +1,55 @@
-{ inputs, pkgs, unstablePkgs, ... }:
-let
-  inherit (inputs) nixpkgs nixpkgs-unstable;
-in
+{ pkgs, ... }:
 {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    nixpkgs-unstable.legacyPackages.${pkgs.system}.beszel
-    nixpkgs-unstable.legacyPackages.${pkgs.system}.talosctl
-
-    ## stable
-    act
-    ansible
-    btop
+    ## En uso
+    btop          # monitor de procesos
     coreutils
-    diffr # Modern Unix `diff`
-    difftastic # Modern Unix `diff`
-    drill
-    du-dust # Modern Unix `du`
-    dua # Modern Unix `du`
-    duf # Modern Unix `df`
-    entr # Modern Unix `watch`
-    #esptool #programar, borrar, y leer la memoria flash de dispositivos ESP
-    fastfetch
-    fd
+    difftastic    # diff con syntax awareness
+    drill         # DNS lookup
+    du-dust       # du moderno
+    duf           # df moderno
+    entr          # ejecutar comando al cambiar archivos
+    fastfetch     # info del sistema
+    fd            # find moderno
     ffmpeg
-    figurine
-    gh
-    git-crypt
+    gh            # GitHub CLI
     gnused
-    go
-    hugo
-    iperf3
-    ipmitool
-    jetbrains-mono # font
-    jq
-    just
-    kubectl
-    mc
-    mosh
-    nmap
-    qemu
-    ripgrep
-    skopeo
-    smartmontools
-    #television
-    #terraform
+    iperf3        # test de velocidad de red
+    jq            # JSON CLI
+    just          # task runner (make moderno)
+    mosh          # SSH resistente a desconexiones
+    nmap          # escaneo de red
+    ripgrep       # grep moderno
+    skopeo        # gestión de imágenes Docker/OCI
+    smartmontools # salud de discos
     tree
     unzip
+    uv            # Python package manager
     watch
     wget
-    wireguard-tools
-    zoxide
+    zoxide        # cd inteligente
 
-    # requires nixpkgs.config.allowUnfree = true;
-    vscode-extensions.ms-vscode-remote.remote-ssh
+    ## Comentados - activar si los necesito
+    #act          # ejecutar GitHub Actions localmente
+    #ansible      # automation
+    #beszel       # monitor de servers
+    #diffr        # otro diff coloreado (alternativa a difftastic)
+    #dua          # otro analizador de espacio (alternativa a dust)
+    #esptool      # programar memoria flash de dispositivos ESP
+    #figurine     # ASCII art banners
+    #git-crypt    # encriptar archivos en git
+    #go           # compilador Go
+    #hugo         # generador de sitios estáticos
+    #ipmitool     # gestión de servers vía IPMI
+    #jetbrains-mono   # fuente (ya está en fonts.packages)
+    #kubectl      # CLI de Kubernetes
+    #mc           # Midnight Commander (file manager TUI)
+    #qemu         # virtualización
+    #talosctl     # CLI de Talos (k8s)
+    #television   # selector fuzzy
+    #terraform    # IaC
+    #wireguard-tools  # VPN
+    #vscode-extensions.ms-vscode-remote.remote-ssh
   ];
 }

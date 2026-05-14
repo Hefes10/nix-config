@@ -1,16 +1,14 @@
 { inputs, outputs, stateVersion, ... }:
 {
-  mkDarwin = { hostname, username ? "hefes", system ? "aarch64-darwin",}:
+  mkDarwin = { hostname, username ? "hefes", system ? "aarch64-darwin", }:
   let
-    inherit (inputs.nixpkgs) lib;
-    unstablePkgs = inputs.nixpkgs-unstable.legacyPackages.${system};
+    inherit (inputs.nixpkgs-darwin) lib;
     customConfPath = ./../hosts/darwin/${hostname};
-    customConf = if builtins.pathExists (customConfPath) then (customConfPath + "/default.nix") else ./../hosts/common/darwin-common-dock.nix;
+    customConf = if builtins.pathExists (customConfPath) then (customConfPath + "/default.nix") else ./../hosts/common/darwin-common.nix;
     homeConfigPath = ./../home + "/${username}.nix";
   in
     inputs.nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit system inputs username unstablePkgs; };
-      #extraSpecialArgs = { inherit inputs; }
+      specialArgs = { inherit system inputs username; };
       modules = [
         ../hosts/common/common-packages.nix
         ../hosts/common/darwin-common.nix
@@ -30,7 +28,6 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "backup";
             home-manager.extraSpecialArgs = { inherit inputs; };
-            #home-manager.sharedModules = [ inputs.nixvim.homeManagerModules.nixvim ];
             home-manager.users.${username} = { imports = [ homeConfigPath ]; };
         }
         inputs.nix-homebrew.darwinModules.nix-homebrew {
@@ -43,14 +40,9 @@
             taps = with inputs; {
               "homebrew/homebrew-core" = homebrew-core;
               "homebrew/homebrew-cask" = homebrew-cask;
-              "homebrew/homebrew-bundle" = homebrew-bundle;
             };
           };
         }
-
       ];
-      # ] ++ lib.optionals (builtins.pathExists ./../hosts/darwin/${hostname}/default.nix) [
-      #     (import ./../hosts/darwin/${hostname}/default.nix)
-      #   ];
     };
 }

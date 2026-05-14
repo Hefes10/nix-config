@@ -1,6 +1,6 @@
-{ inputs, outputs, config, lib, hostname, system, username, pkgs, unstablePkgs, ... }:
+{ inputs, outputs, config, lib, hostname, system, username, pkgs, ... }:
 let
-  inherit (inputs) nixpkgs nixpkgs-unstable;
+  inherit (inputs) nixpkgs-darwin;
 in
 {
   users.users.hefes.home = "/Users/hefes";
@@ -24,12 +24,9 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    ## unstable
-    unstablePkgs.yt-dlp
-    unstablePkgs.get_iplayer
-    unstablePkgs.colmena
+    yt-dlp
+    get_iplayer
 
-    ## stable CLI
     pkgs.comma
     pkgs.hcloud
     pkgs.just
@@ -44,15 +41,11 @@ in
     pkgs.nerd-fonts.jetbrains-mono
   ];
 
-  # pins to stable as unstable updates very often
+  # pins to nixpkgs-darwin (unstable) so 'nix run nixpkgs#foo' uses our pinned version
   nix.registry = {
     n.to = {
       type = "path";
-      path = inputs.nixpkgs;
-    };
-    u.to = {
-      type = "path";
-      path = inputs.nixpkgs-unstable;
+      path = inputs.nixpkgs-darwin;
     };
   };
 
@@ -74,117 +67,112 @@ in
     global.autoUpdate = true;
 
     brews = [
-      "bitwarden-cli"
-      #"borders"
+      # vacío - todo movido a casks o nix
     ];
     taps = [
-      #"FelixKratz/formulae" #sketchybar
     ];
     casks = [
-      "screenflow"
-      "cleanshot"
-      #"adobe-creative-cloud"
-      #"nikitabobko/tap/aerospace"
-      "alacritty"
-      "alcove"
+      ## Terminales
+      "ghostty"
+      "warp"
+      #"alacritty"
+      #"iterm2"
+
+      ## Comunicación
+      "discord"
+      "spotify"
+      #"signal"
+      #"slack"
+
+      ## Productividad
+      "claude"             # Anthropic desktop app
+      "claude-code"        # Anthropic CLI
+      "evernote"
+      "marta"              # file manager
+      "notion"
+      "raycast"
+      "visual-studio-code"
+      #"firefox"
+      #"obsidian"
+
+      ## Multimedia
       "audacity"
-      #"balenaetcher"
+      "iina"
+      "obs"                # grabación de pantalla
+      "openscad"           # CAD 3D
+      "vlc"
+      #"cleanshot"
+      #"flameshot"
+      #"screenflow"
+
+      ## Sistema / utilidades
+      "bitwarden-cli"      # password manager CLI
+      "istat-menus"
+      "omnidisksweeper"
+      #"alcove"
+      #"jordanbaird-ice"
+      #"popclip"
+      #"shortcat"
+
+      ## Dev / containers / networking
+      "docker"
+      "orbstack"
+      "surfshark"          # VPN
+      "tailscale-app"
+      #"viscosity"         # alternativa OpenVPN
+
+      ## Office (descomentar si lo necesito)
+      #"libreoffice"
+
+      ## Fuentes (redundantes con fonts.packages de Nix)
+      #"font-fira-code"
+      #"font-fira-code-nerd-font"
+      #"font-fira-mono-for-powerline"
+      #"font-hack-nerd-font"
+      #"font-jetbrains-mono-nerd-font"
+      #"font-meslo-lg-nerd-font"
+
+      ## Apps comentadas (no usadas actualmente)
+      #"adobe-creative-cloud"
+      #"audio-hijack"
       #"bambu-studio"
       #"bentobox"
-      #"clop"
-      "discord"
       #"displaylink"
-      "docker"
       #"element"
       #"elgato-camera-hub"
       #"elgato-control-center"
       #"elgato-stream-deck"
-      "firefox"
-      "flameshot"
-      "font-fira-code"
-      "font-fira-code-nerd-font"
-      "font-fira-mono-for-powerline"
-      "font-hack-nerd-font"
-      "font-jetbrains-mono-nerd-font"
-      "font-meslo-lg-nerd-font"
-      "ghostty"
+      #"farrago"
       #"google-chrome"
-      "iina"
-      "istat-menus"
-      "iterm2"
-      "jordanbaird-ice"
       #"lm-studio"
       #"logitech-options"
+      #"loopback"
       #"macwhisper"
-      "marta"
       #"mqtt-explorer"
-      #"music-decoy" # github/FuzzyIdeas/MusicDecoy
+      #"music-decoy"
       #"nextcloud"
-      "notion"
-      "obs"
-      "obsidian"
       #"ollama"
-      "omnidisksweeper"
-      "orbstack"
-      "openscad"
       #"openttd"
       #"plexamp"
-      "popclip"
-      #"prusaslicer" #simil ultimaker cura
-      "raycast"
-      "signal"
-      "shortcat"
-      #"slack"
-      "spotify"
-      #"steam"
-      "tailscale-app"
-      #"wireshark"
-      "viscosity"
-      "visual-studio-code"
-      "vlc"
-      "warp"
-      # "lm-studio"
-
-      # # rogue amoeba
-      #"audio-hijack"
-      #"farrago"
-      #"loopback"
+      #"prusaslicer"
       #"soundsource"
+      #"steam"
+      #"wireshark"
     ];
     masApps = {
-      #"Amphetamine" = 937984704;
-      ##"AutoMounter" = 1160435653;
-      #"Bitwarden" = 1352778147;
-      ##"Creator's Best Friend" = 1524172135;
-      ##"DaVinci Resolve" = 571213070;
-      ##"Disk Speed Test" = 425264550;
-      ##"Fantastical" = 975937182;
-      ##"Ivory for Mastodon by Tapbots" = 6444602274;
+      "WhatsApp" = 310633997;
+      "Telegram" = 747648890;
+
+      ## Comentados - descomentar para instalar
+      #"Pages" = 409201541;
+      #"Keynote" = 409183694;
+      #"Numbers" = 409203825;
       #"Home Assistant Companion" = 1099568401;
       #"Microsoft Remote Desktop" = 1295203466;
       #"Perplexity" = 6714467650;
-      #"Resize Master" = 102530679;
-      ##"rCmd" = 1596283165;
       #"Snippety" = 1530751461;
-      ##"Tailscale" = 1475387142;
-      #"Telegram" = 747648890;
       #"The Unarchiver" = 425424353;
-      #"Todoist" = 585829637;
       #"UTM" = 1538878817;
-      #"Wireguard" = 1451685025;
-
-      #"Final Cut Pro" = 424389933;
-
-      # these apps only available via uk apple id
-      #"Logic Pro" = 634148309;
-      #"MainStage" = 634159523;
-      #"Garageband" = 682658836;
-      #"ShutterCount" = 720123827;
-      #"Teleprompter" = 1533078079;
-
-      "Keynote" = 409183694;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
     };
   };
 
@@ -223,7 +211,6 @@ in
         ShowMountedServersOnDesktop = false;
         ShowRemovableMediaOnDesktop = true;
         _FXSortFoldersFirst = true;
-        # When performing a search, search the current folder by default
         FXDefaultSearchScope = "SCcf";
         DisableAllAnimations = true;
         NewWindowTarget = "PfDe";
@@ -235,7 +222,6 @@ in
         WarnOnEmptyTrash = false;
       };
       "com.apple.desktopservices" = {
-        # Avoid creating .DS_Store files on network or USB volumes
         DSDontWriteNetworkStores = true;
         DSDontWriteUSBStores = true;
       };
@@ -245,7 +231,7 @@ in
         static-only = false;
         show-recents = false;
         show-process-indicators = true;
-        orientation = "left";
+        orientation = "bottom";
         tilesize = 36;
         minimize-to-application = true;
         mineffect = "scale";
@@ -258,7 +244,6 @@ in
         SortDirection = 0;
       };
       "com.apple.Safari" = {
-        # Privacy: don’t send search queries to Apple
         UniversalSearchEnabled = false;
         SuppressSearchSuggestions = true;
       };
@@ -267,17 +252,12 @@ in
       };
       "com.apple.SoftwareUpdate" = {
         AutomaticCheckEnabled = true;
-        # Check for software updates daily, not just once per week
         ScheduleFrequency = 1;
-        # Download newly available updates in background
         AutomaticDownload = 1;
-        # Install System data files & security updates
         CriticalUpdateInstall = 1;
       };
       "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
-      # Prevent Photos from opening automatically when devices are plugged in
       "com.apple.ImageCapture".disableHotPlug = true;
-      # Turn on app auto-update
       "com.apple.commerce".AutoUpdate = true;
       "com.googlecode.iterm2".PromptOnQuit = false;
       "com.google.Chrome" = {
