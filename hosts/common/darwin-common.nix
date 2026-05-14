@@ -243,10 +243,6 @@ in
         SortColumn = "CPUUsage";
         SortDirection = 0;
       };
-      "com.apple.Safari" = {
-        UniversalSearchEnabled = false;
-        SuppressSearchSuggestions = true;
-      };
       "com.apple.AdLib" = {
         allowApplePersonalizedAdvertising = false;
       };
