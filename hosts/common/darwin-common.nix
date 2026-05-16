@@ -93,7 +93,7 @@ in
       "raycast"
       "visual-studio-code"
       #"firefox"
-      #"obsidian"
+      "obsidian"
 
       ## Multimedia
       "audacity"
@@ -106,7 +106,7 @@ in
       #"screenflow"
 
       ## Sistema / utilidades
-      "istat-menus"
+      "stats"
       "omnidisksweeper"
       #"alcove"
       #"jordanbaird-ice"
