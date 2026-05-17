@@ -107,14 +107,14 @@ in
 
       ## Sistema / utilidades
       "stats"
-      "omnidisksweeper"
+      #"omnidisksweeper"
       #"alcove"
       #"jordanbaird-ice"
       #"popclip"
       #"shortcat"
 
       ## Dev / containers / networking
-      "docker"
+      "docker-desktop"
       "orbstack"
       "surfshark"          # VPN
       "tailscale-app"
